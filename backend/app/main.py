@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import auth, task
+from app.routes import workflow  
 
 app = FastAPI()
 
@@ -53,4 +54,9 @@ def custom_openapi():
     return app.openapi_schema
 
 app.openapi = custom_openapi
+
+
+
+app.include_router(workflow.router, prefix="/workflows", tags=["Workflows"])
+
 
